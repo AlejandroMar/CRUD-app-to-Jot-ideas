@@ -26,6 +26,11 @@ router.get('/edit/:id', (req, res, next) => {
     
 });
 
+// Edit the Idea with PUT request
+router.put('/:id', (req, res, next) => {
+    res.send('PUT');
+})
+
 
 //Process Form
 router.post('/', (req, res) => {

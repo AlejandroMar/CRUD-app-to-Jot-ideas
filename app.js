@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 const app = express();
 const port = 5000;
@@ -15,6 +16,9 @@ app.set('view engine', 'handlebars');
 app.use(express.urlencoded({ extended: false }));
 // parse application/json
 app.use(express.json());
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 
 //set promise to native global

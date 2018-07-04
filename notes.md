@@ -201,3 +201,23 @@ easy just follow the code
 ###### put request
 
 with out ajax we ca't simply do put request with express for that we need the npm package method-override
+we want to do it using a query value
+
+docs [method-override](https://github.com/expressjs/method-override) 
+
+```javascript
+var express = require('express')
+var methodOverride = require('method-override')
+var app = express()
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
+```
+
+```html
+<form method="POST" action="/resource?_method=DELETE">
+<input type="hidden" name="_method" value="DELETE">
+  <button type="submit">Delete resource</button>
+</form>
+
+```
