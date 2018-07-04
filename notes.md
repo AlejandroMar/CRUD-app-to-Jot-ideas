@@ -193,3 +193,5 @@ We get an array back to work in the /ideas/index view so we can do something lik
 
 ## Section 4 lecture 21
 ##### Edit idea form
+
+easy just follow the code
