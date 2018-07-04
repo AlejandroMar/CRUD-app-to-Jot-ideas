@@ -195,3 +195,9 @@ We get an array back to work in the /ideas/index view so we can do something lik
 ##### Edit idea form
 
 easy just follow the code
+
+## Section 4 lecture 22
+##### Update idea 
+###### put request
+
+with out ajax we ca't simply do put request with express for that we need the npm package method-override
