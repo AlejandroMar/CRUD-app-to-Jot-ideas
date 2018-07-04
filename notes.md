@@ -164,3 +164,32 @@ for frontend just add for now the required atribute to the input and textarea fi
 connect to mongo server and save your ideas then use robomogo to see if it is working.
 
 
+## Section 4 lecture 20
+##### fetching ideas from mongoDB
+```javascript
+router.get('/', (req, res) => {
+    IdeaModel.find({})
+        //sort ideas in descending order
+        .sort({date: 'desc'})
+        .then((ideas) => {
+            res.render('ideas/index', {
+                ideas
+            });
+        });  
+});
+```
+We get an array back to work in the /ideas/index view so we can do something like this
+
+```html
+{{#each ideas}}
+    <div class="card card-body">
+        <h4>{{title}}</h4>
+        <p>{{details}}</p>
+    </div>
+{{else}}
+    <p>No Ideas listed</p>
+{{/each}}
+```
+
+## Section 4 lecture 21
+##### Edit idea form

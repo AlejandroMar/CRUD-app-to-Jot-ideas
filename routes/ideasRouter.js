@@ -7,6 +7,25 @@ router.get('/add', (req, res, next) => {
     res.render('ideas/add');
 });
 
+router.get('/', (req, res) => {
+    IdeaModel.find({})
+        //sort ideas in descending order
+        .sort({date: 'desc'})
+        .then((ideas) => {
+            res.render('ideas/index', {
+                ideas
+            });
+        });  
+});
+
+// Edit Idea form
+router.get('/edit/:id', (req, res, next) => {
+    IdeaModel.findOne({ _id: req.params.id })
+        .then(idea => res.render('ideas/edit', { idea }))
+
+    
+});
+
 
 //Process Form
 router.post('/', (req, res) => {

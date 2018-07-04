@@ -1,0 +1,10 @@
+{{#each ideas}}
+    <div class="card card-body mb-2">
+        <h4>{{title}}</h4>
+        <p>{{details}}</p>
+        {{!-- here we can access the mongoDB id I can also access it with underscore _ --}}
+        <a class="btn btn-dark btn-block" href="/ideas/edit/{{id}}">Edit your Idea</a>
+    </div>
+{{else}}
+    <p>No Ideas listed</p>
+{{/each}}
