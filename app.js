@@ -28,13 +28,12 @@ mongoose.connect('mongodb://localhost:27017/vidjot-dev')
 //Load Idea model
 const IdeaModel = require('./models/Idea');
 const indexRouter = require('./routes/indexRouter');
+const aboutRouter = require('./routes/aboutRouter');
 
 app.use('/', indexRouter);
+app.use('/about', aboutRouter);
 
 
-app.get('/about', (req, res, next) => {
-    res.render('about')
-});
 
 app.get('/ideas/add', (req, res, next) => {
     res.render('ideas/add');
