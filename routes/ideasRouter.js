@@ -26,7 +26,7 @@ router.get('/edit/:id', (req, res, next) => {
     
 });
 
-// Edit the Idea with PUT request
+// Edit the Idea with PUT request method
 router.put('/:id', (req, res, next) => {
 
     IdeaModel.findOne({ _id: req.params.id })
@@ -39,8 +39,12 @@ router.put('/:id', (req, res, next) => {
         .catch(err => console.log(err))
 });
 
+// Delete ideas with DELETE request method
 router.delete('/:id', (req, res, next) => {
-    res.send('Delete')
+    IdeaModel.remove({ _id: req.params.id })
+        .then(() => {
+            res.redirect('/ideas');
+        })
 })
 
 
