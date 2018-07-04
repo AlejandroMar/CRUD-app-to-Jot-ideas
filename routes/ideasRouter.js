@@ -28,8 +28,17 @@ router.get('/edit/:id', (req, res, next) => {
 
 // Edit the Idea with PUT request
 router.put('/:id', (req, res, next) => {
-    res.send('PUT');
-})
+
+    IdeaModel.findOne({ _id: req.params.id })
+        .then(idea => {
+            idea.title = req.body.title;
+            idea.details = req.body.details;
+            //I want to practice  promises
+            return Promise.resolve(idea);
+        }).then(idea => idea.save()).then(idea => res.redirect('/ideas'))
+        .catch(err => console.log(err))
+});
+
 
 
 //Process Form

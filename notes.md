@@ -221,3 +221,5 @@ app.use(methodOverride('_method'))
 </form>
 
 ```
+
+once you make the New request check the URL to see the extra parameter
