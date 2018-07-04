@@ -132,5 +132,32 @@ app.use(express.json());
 This middleware parses the incoming request and turns the body of the request into an usable object. where the given names and values that are in the body can be used.
 
 ##### server side validation
+```javascript
+app.post('/ideas', (req, res) => {
+    //simple server validation
+    let errors = [];
+
+    if(!req.body.title){
+      errors.push({text: 'Please add a title'}); 
+      
+    }
+    if(!req.body.details){
+      errors.push({text: 'Please add some details'});  
+    }
+    // if there are errors
+    if(errors.length > 0){
+        res.render('ideas/add', {
+            errors: errors,
+            title: req.body.title,
+            details: req.body.details 
+        });
+    }else{
+        res.send('passed');
+    }
+    
+})
+```
+for frontend just add for now the required atribute to the input and textarea fields
+
 
 
