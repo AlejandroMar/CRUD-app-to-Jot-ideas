@@ -223,3 +223,13 @@ app.use(methodOverride('_method'))
 ```
 
 once you make the New request check the URL to see the extra parameter
+
+the thing is I don't find traversy's way of doing it clean, I think it could be done better with model.update
+or something like that
+
+## Section 4 lecture 23
+##### delete idea
+delete request
+add delete button  and use method-override again
+Note: As long as the methods are diferent the urls can be the same.
+

@@ -39,6 +39,10 @@ router.put('/:id', (req, res, next) => {
         .catch(err => console.log(err))
 });
 
+router.delete('/:id', (req, res, next) => {
+    res.send('Delete')
+})
+
 
 
 //Process Form

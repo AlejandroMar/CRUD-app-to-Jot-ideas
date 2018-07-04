@@ -1,10 +1,15 @@
 {{#each ideas}}
-    <div class="card card-body mb-2">
-        <h4>{{title}}</h4>
-        <p>{{details}}</p>
-        {{!-- here we can access the mongoDB id I can also access it with underscore _ --}}
-        <a class="btn btn-dark btn-block" href="/ideas/edit/{{id}}">Edit your Idea</a>
-    </div>
+<div class="card card-body mb-2">
+    <h4>{{title}}</h4>
+    <p>{{details}}</p>
+    {{!-- here we can access the mongoDB id I can also access it with underscore _ --}}
+    <a class="btn btn-dark btn-block mb-2" href="/ideas/edit/{{id}}">Edit your Idea</a>
+
+    <form action="/ideas/{{id}}?_method=DELETE" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete" class="btn btn-danger btn-block">
+    </form>
+</div>
 {{else}}
-    <p>No Ideas listed</p>
+<p>No Ideas listed</p>
 {{/each}}
