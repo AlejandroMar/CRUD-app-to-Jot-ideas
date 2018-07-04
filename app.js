@@ -27,15 +27,10 @@ mongoose.connect('mongodb://localhost:27017/vidjot-dev')
 
 //Load Idea model
 const IdeaModel = require('./models/Idea');
+const indexRouter = require('./routes/indexRouter');
 
+app.use('/', indexRouter);
 
-
-app.get('/', (req, res, next) => {
-
-    const title = 'Welcome Alejandro';
-    // with es6
-    res.render('index', { title });
-});
 
 app.get('/about', (req, res, next) => {
     res.render('about')
@@ -66,6 +61,7 @@ app.post('/ideas', (req, res) => {
         });
     }else{
         res.send('passed');
+
     }
     
 })
