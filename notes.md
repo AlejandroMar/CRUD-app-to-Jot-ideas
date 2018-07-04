@@ -159,5 +159,8 @@ app.post('/ideas', (req, res) => {
 ```
 for frontend just add for now the required atribute to the input and textarea fields
 
+## Section 4 lecture 19
+##### saving idea to mongoDB
+connect to mongo server and save your ideas then use robomogo to see if it is working.
 
 

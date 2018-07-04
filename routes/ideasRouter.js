@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const IdeaModel = require('../models/Idea');
 
 router.get('/add', (req, res, next) => {
@@ -27,7 +28,16 @@ router.post('/', (req, res) => {
             details: req.body.details 
         });
     }else{
-        res.send('passed');
+        const newUser = {
+            title: req.body.title,
+            details: req.body.details
+        }
+
+        new IdeaModel(newUser)
+            .save()
+            .then(idea => {
+                res.redirect('/ideas');
+            })
 
     }
     
