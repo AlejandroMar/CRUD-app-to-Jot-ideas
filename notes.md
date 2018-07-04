@@ -118,3 +118,19 @@ mongodb is schmaless but with mongoose we use the schema to keep our collections
  
 ## Section 4 lecture 17
 let's add some more views for creating ideas and so on
+
+## Section 4 lecture 18
+##### server side form validation
+
+to get input values from a form we use body parser, but it is already implemented by express so we just write 
+```javascript
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false }));
+// parse application/json
+app.use(express.json());
+```
+This middleware parses the incoming request and turns the body of the request into an usable object. where the given names and values that are in the body can be used.
+
+##### server side validation
+
+
