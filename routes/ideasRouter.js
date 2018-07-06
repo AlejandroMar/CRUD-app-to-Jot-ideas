@@ -38,7 +38,11 @@ router.put('/:id', (req, res, next) => {
             idea.details = req.body.details;
             //I want to practice  promises
             return Promise.resolve(idea);
-        }).then(idea => idea.save()).then(idea => res.redirect('/ideas'))
+        }).then(idea => idea.save())
+            .then(idea => {
+                req.flash('success_msg', 'Idea updated');
+                res.redirect('/ideas')
+            })
         .catch(err => console.log(err))
 });
 
@@ -81,6 +85,7 @@ router.post('/', (req, res) => {
         new IdeaModel(newUser)
             .save()
             .then(idea => {
+                req.flash('success_msg', 'New Idea added');
                 res.redirect('/ideas');
             })
 
