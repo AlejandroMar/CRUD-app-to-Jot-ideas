@@ -84,7 +84,7 @@ create a partial folder in views and there create a _navbar.hadlebars file where
 
 [instructions](https://www.udemy.com/the-complete-nodejs-developer-course-2/learn/v4/t/lecture/5677846?start=0)
 
-* go to mongodg webpage and downoad it, in mac extract the file it's an executable, rename it to mongo, and move it to user directory
+* go to mongoDB webpage and downoad it, in mac extract the file it's an executable, rename it to mongo, and move it to user directory
 * create another folder alongside the mongo folder, not inside but beside and name it mongo-data this holdes the actual data in the data-base
 * got to terminal and navigate to mongo folder and cd to the bin folder
 * ther you find the mongod and mongo files, the mongod is for the data-base server and the mongo for the mongodb connection app to have the data base running on mongodb server
@@ -232,4 +232,60 @@ or something like that
 delete request
 add delete button  and use method-override again
 Note: As long as the methods are diferent the urls can be the same.
+
+
+## Section 4 lecture 24 
+### Implement flash
+
+first we have to use the express-session package: npm
+
+[express-session](https://github.com/expressjs/session) documentation.
+[npm express-session](https://www.npmjs.com/package/express-session)
+
+npm install express-session
+#### session basic options
+##### secret 
+in express-sesion is the string used to salt the hash to compare the cookie id between client and  server;
+
+##### resave.
+ tells to save or not the session information every time a request is made, no matter if there were changes or 
+ 
+##### saveUninitialized
+the session it's just an onbject that at the beginning is empty, it's meant to store the information about the user and it's behaviour
+saveUninitialized stores the session object even when it's empty or not initialized. if it is false the session only get's stored when something get's writen in the object.
+
+to access the session i just have to use req.session
+exm:  console.log(req.session);
+
+
+
+[connect-flash](https://github.com/jaredhanson/connect-flash) documentation
+The flash is a special area of the session used for storing messages. Messages are written to the flash and cleared after being displayed to the user. The flash is typically used in combination with redirects, ensuring that the message is available to the next page that is to be rendered.
+
+```javascript
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+```
+
+
+#####res.locals
+An object that contains response local variables scoped to the request, and therefore available only to the view(s) rendered during that request / response cycle (if any). Otherwise, this property is identical to app.locals.
+
+now check in folder views the partial _msg and note that it gets injected in main.handlebars
+
+now when i delete a note I can flash the following msg
+
+```javascript
+router.delete('/:id', (req, res, next) => {
+    IdeaModel.remove({ _id: req.params.id })
+        .then(() => {
+            req.flash('success_msg', 'Your idea was removed');
+            res.redirect('/ideas');
+        })
+})
+```
 

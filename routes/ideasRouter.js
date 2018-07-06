@@ -3,19 +3,22 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const IdeaModel = require('../models/Idea');
 
+
+//get form to add ideas
 router.get('/add', (req, res, next) => {
     res.render('ideas/add');
 });
 
+//fetch the ideas
 router.get('/', (req, res) => {
     IdeaModel.find({})
         //sort ideas in descending order
-        .sort({date: 'desc'})
+        .sort({ date: 'desc' })
         .then((ideas) => {
             res.render('ideas/index', {
                 ideas
             });
-        });  
+        });
 });
 
 // Edit Idea form
@@ -23,7 +26,7 @@ router.get('/edit/:id', (req, res, next) => {
     IdeaModel.findOne({ _id: req.params.id })
         .then(idea => res.render('ideas/edit', { idea }))
 
-    
+
 });
 
 // Edit the Idea with PUT request method
@@ -43,9 +46,10 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
     IdeaModel.remove({ _id: req.params.id })
         .then(() => {
+            req.flash('success_msg', 'Your idea was removed');
             res.redirect('/ideas');
         })
-})
+});
 
 
 
