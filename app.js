@@ -9,6 +9,7 @@ const session = require('express-session');
 const indexRouter = require('./routes/indexRouter');
 const aboutRouter = require('./routes/aboutRouter');
 const ideasRouter = require('./routes/ideasRouter');
+const usersRouter = require('./routes/usersRouter');
 
 const app = express();
 const port = 5000;
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/about', aboutRouter);
 app.use('/ideas', ideasRouter);
+app.use('/users', usersRouter);
 
 
 app.listen(port, () => {
