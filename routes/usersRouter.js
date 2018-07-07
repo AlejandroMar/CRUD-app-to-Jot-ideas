@@ -43,13 +43,19 @@ router.post('/register', (req, res) => {
 
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if(err) throw err;
+                if (err) throw err;
                 newUser.password = hash;
-                console.log(newUser);
+                newUser.save()
+                    .then((user) => {
+                        req.flash('success_msg', 'You are registered and can log in');
+                        //I think redirect works as a request to a url 
+                        res.redirect('/users/login');
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
             });
         });
-        
-        res.send('passed');
     }
 })
 
