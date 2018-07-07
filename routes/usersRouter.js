@@ -35,27 +35,35 @@ router.post('/register', (req, res) => {
         });
 
     } else {
-        const newUser = new UserModel({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
-        })
+        UserModel.findOne({ email: req.body.email })
+            .then(user => {
+                if (user) {
+                    req.flash('error_msg', 'email already exist');
+                    res.redirect('/users/register');
+                } else {
+                    const newUser = new UserModel({
+                        name: req.body.name,
+                        email: req.body.email,
+                        password: req.body.password
+                    })
 
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if (err) throw err;
-                newUser.password = hash;
-                newUser.save()
-                    .then((user) => {
-                        req.flash('success_msg', 'You are registered and can log in');
-                        //I think redirect works as a request to a url 
-                        res.redirect('/users/login');
-                    }).catch((err) => {
-                        console.log(err);
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(newUser.password, salt, (err, hash) => {
+                            if (err) throw err;
+                            newUser.password = hash;
+                            newUser.save()
+                                .then((user) => {
+                                    req.flash('success_msg', 'You are registered and can log in');
+                                    //I think redirect works as a request to a url 
+                                    res.redirect('/users/login');
+                                }).catch((err) => {
+                                    console.log(err);
+                                });
+
+                        });
                     });
-
+                }
             });
-        });
     }
 })
 
