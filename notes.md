@@ -294,16 +294,20 @@ A callback place in the function argument acording to es6 is should be the first
 
 say if -1 return undefined or null, just an idea.
 
-## section 4 lecture 25
+## section 5 lecture 25
 #### A look at passport
 basically we create a route  with post to /login and then we use the method: passport.authenticate('strategy')
 
 
 
-## section 4 lecture 26
+## section 5 lecture 26
 #### express router
 + In this lecture he uses the express router with the routes folder. But I already did it.
 
-## section 4 lecture 27
+## section 5 lecture 27
 #### login and register pages
 res.render('users/login'); don't add / at the begining 
+
+
+## section 5 lecture 28
+#### register form Validation
