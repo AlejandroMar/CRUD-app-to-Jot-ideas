@@ -330,3 +330,11 @@ name="password"
 
 ```
 
+## section 5 lecture 29
+#### User registration
+
+[bcryptjs](https://github.com/dcodeIO/bcrypt.js#readme) documentation
+
+
+
+
