@@ -313,3 +313,19 @@ res.render('users/login'); don't add / at the begining
 #### register form Validation
 install bcryptjs 
 npm i --save bcryptjs
+
+in the form action="/url/path"   method="POST"
+let's see if the passwords match
+
+The name="email" atribute set the property name in the request body object
+name="name"
+name="email"
+name="password"
+```javascript
+
+{ name: 'Alejandro Márquez',
+  email: 'mot@hotmail.com',
+  password: 'sds',
+  password2: 'sdsd' }
+
+```
