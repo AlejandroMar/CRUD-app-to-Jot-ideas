@@ -5,8 +5,23 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 
+//Load routes
+const indexRouter = require('./routes/indexRouter');
+const aboutRouter = require('./routes/aboutRouter');
+const ideasRouter = require('./routes/ideasRouter');
+
 const app = express();
 const port = 5000;
+
+
+//set promise to native global
+mongoose.Promise = global.Promise
+
+//Connect to mongoose
+mongoose.connect('mongodb://localhost:27017/vidjot-dev')
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log(err));
+
 
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
@@ -41,27 +56,9 @@ app.use((req, res, next) => {
 
 
 
-//set promise to native global
-mongoose.Promise = global.Promise
-
-//Connect to mongoose
-mongoose.connect('mongodb://localhost:27017/vidjot-dev')
-    .then(() => console.log('MongoDB Connected...'))
-    .catch(err => console.log(err));
-
-//Load Idea model
-
-const indexRouter = require('./routes/indexRouter');
-const aboutRouter = require('./routes/aboutRouter');
-const ideasRouter = require('./routes/ideasRouter');
-
 app.use('/', indexRouter);
 app.use('/about', aboutRouter);
 app.use('/ideas', ideasRouter);
-
-
-
-
 
 
 app.listen(port, () => {

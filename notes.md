@@ -112,7 +112,7 @@ mongoose.connect('mongodb://localhost:27017/vidjot-dev')
 
 
 ## Section 4 lecture 16.
-mongodb is schmaless but with mongoose we use the schema to keep our collections and documents consistent
+mongodb is schemaless but with mongoose we use the schema to keep our collections and documents consistent
 
 + create your models folder and inside create an Idea.js file it is a good practice to name your models with a capital letter
  
@@ -272,7 +272,7 @@ app.use((req, res, next) => {
 ```
 
 
-#####res.locals
+##### res.locals
 An object that contains response local variables scoped to the request, and therefore available only to the view(s) rendered during that request / response cycle (if any). Otherwise, this property is identical to app.locals.
 
 now check in folder views the partial _msg and note that it gets injected in main.handlebars
@@ -288,4 +288,14 @@ router.delete('/:id', (req, res, next) => {
         })
 })
 ```
+
+####callback:
+A callback place in the function argument acording to es6 is should be the first argument, because that way i can use the rest paramenter also called ellipsis operator.
+
+say if -1 return undefined or null, just an idea.
+
+## section 4 lecture 25
+#### A look at passport
+basically we create a route  with post to /login and then we use the method: passport.authenticate('strategy')
++ In this lecture he uses the express router with the routes folder. But I already did it.
 
