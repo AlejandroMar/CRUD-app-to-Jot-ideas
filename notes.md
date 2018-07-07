@@ -334,7 +334,10 @@ name="password"
 #### User registration
 
 [bcryptjs](https://github.com/dcodeIO/bcrypt.js#readme) documentation
+We don't need passport to register because all we are doing is saving a hashed password to the data-base
 
+## section 5 lecture 30
+#### Hooking up a local strategy with passport
 
 
 
