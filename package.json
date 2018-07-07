@@ -10,6 +10,7 @@
   "author": "AlejandroMar",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",

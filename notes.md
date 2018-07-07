@@ -311,3 +311,5 @@ res.render('users/login'); don't add / at the begining
 
 ## section 5 lecture 28
 #### register form Validation
+install bcryptjs 
+npm i --save bcryptjs
