@@ -389,3 +389,4 @@ The serialization and deserialization logic is supplied by the application, allo
 
 
 add passport initialize and passport session very miportant after normal session
+once loged in we have access to req.user wich saves the passport information about the user's session, we can create a global variable to use it everywhere we need it
