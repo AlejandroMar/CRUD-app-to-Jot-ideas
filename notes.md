@@ -408,4 +408,5 @@ the logout() method comes from passport
 ## section 5 lecture 33
 #### protecting routes 
 create a function ensure authenticated as a helper and use it where ever you need
+* create a helpers folder and there create a file called auth.js
 

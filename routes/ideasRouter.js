@@ -3,14 +3,17 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const IdeaModel = require('../models/Idea');
 
+//Load helper
+const {ensureAuthenticated} = require('../helpers/auth');
+
 
 //get form to add ideas
-router.get('/add', (req, res, next) => {
+router.get('/add', ensureAuthenticated, (req, res, next) => {
     res.render('ideas/add');
 });
 
 //fetch the ideas
-router.get('/', (req, res) => {
+router.get('/', ensureAuthenticated, (req, res) => {
     IdeaModel.find({})
         //sort ideas in descending order
         .sort({ date: 'desc' })
@@ -22,7 +25,7 @@ router.get('/', (req, res) => {
 });
 
 // Edit Idea form
-router.get('/edit/:id', (req, res, next) => {
+router.get('/edit/:id', ensureAuthenticated, (req, res, next) => {
     IdeaModel.findOne({ _id: req.params.id })
         .then(idea => res.render('ideas/edit', { idea }))
 
@@ -30,7 +33,7 @@ router.get('/edit/:id', (req, res, next) => {
 });
 
 // Edit the Idea with PUT request method
-router.put('/:id', (req, res, next) => {
+router.put('/:id', ensureAuthenticated, (req, res, next) => {
 
     IdeaModel.findOne({ _id: req.params.id })
         .then(idea => {
@@ -47,7 +50,7 @@ router.put('/:id', (req, res, next) => {
 });
 
 // Delete ideas with DELETE request method
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', ensureAuthenticated, (req, res, next) => {
     IdeaModel.remove({ _id: req.params.id })
         .then(() => {
             req.flash('success_msg', 'Your idea was removed');
@@ -58,7 +61,7 @@ router.delete('/:id', (req, res, next) => {
 
 
 //Process Form
-router.post('/', (req, res) => {
+router.post('/', ensureAuthenticated, (req, res) => {
     //simple server validation
     let errors = [];
 
