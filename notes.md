@@ -396,3 +396,16 @@ every time I restart the server I lose the session for now
 ## section 5 lecture 32
 #### logout function
 
+```javascript
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'Your are logged out');
+    res.redirect('/users/login');
+})
+```
+the logout() method comes from passport
+
+## section 5 lecture 33
+#### protecting routes 
+create a function ensure authenticated as a helper and use it where ever you need
+

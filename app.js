@@ -47,7 +47,7 @@ app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: true
-  }));
+}));
 
 //passport init and session middleware
 app.use(passport.initialize());

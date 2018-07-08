@@ -18,9 +18,9 @@ router.get('/register', (req, res, next) => {
 router.post('/login', (req, res, next) => {
     //this is how we use the local strategy but we need to defien it
     passport.authenticate('local', {
-       successRedirect: '/ideas',
-       failureRedirect: '/users/login',
-       failureFlash: true 
+        successRedirect: '/ideas',
+        failureRedirect: '/users/login',
+        failureFlash: true
     })(req, res, next);
 });
 
@@ -76,6 +76,12 @@ router.post('/register', (req, res) => {
                 }
             });
     }
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'Your are logged out');
+    res.redirect('/users/login');
 })
 
 
