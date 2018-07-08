@@ -5,6 +5,9 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+require('dotenv').config()
+
+
 
 //Load routes
 const indexRouter = require('./routes/indexRouter');
@@ -14,16 +17,19 @@ const usersRouter = require('./routes/usersRouter');
 
 //passport config
 require('./config/passport')(passport);
+//db config
+const db = require('./config/database');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
+
 
 
 //set promise to native global
 mongoose.Promise = global.Promise
 
 //Connect to mongoose
-mongoose.connect('mongodb://localhost:27017/vidjot-dev')
+mongoose.connect(db.mongoURI)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 

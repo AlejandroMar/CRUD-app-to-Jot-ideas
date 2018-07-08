@@ -415,3 +415,22 @@ create a function ensure authenticated as a helper and use it where ever you nee
 
 we want to show the ideas only to the user that created them, so we need to go to the idea model and add an user field with the user's id, so that every idea has the id of the user that created it.
 go to get('/ideas') and  IdeaModel.find({ user: req.user.id })
+
+## section 5 lecture 35
+#### preparing app for deployment
+* go to package.json and add a start script for heroku
+* then add the port for heroku: process.env.PORT
+```javascript 
+const port = process.env.PORT || 5000;
+```
+* set dev data-base and production data-base. Create a mlab database
+
+
+## section 5 lecture 36
+#### heroku deploy
+* with heroku you need a github repository
+* then install heroku toolbelt
+* in project run heroku login
+* give email, and password
+* then write still in command line: heroku create
+* go to heroku and click on your project
