@@ -20,6 +20,27 @@ module.exports = function (passport) {
                 if(!user){
                     return done(null, false, {message: 'No user found'});
                 }
+
+                //Match password firs arg comes from request is not hashed and 2 arg comes hashed from data-base
+                bcrypt.compare(password, user.password, (err, isMatch) => {
+                    if(err) {return done(err)}
+                    if(isMatch){
+                        //I think this user will be later in the request object
+                        return done(null, user);
+                    }else{
+                        return done(null, false, {message: 'Incorrect password'});
+                    }
+                })
             })
     }));
+
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+      });
+      
+      passport.deserializeUser(function(id, done) {
+        UserModel.findById(id, function(err, user) {
+          done(err, user);
+        });
+      });
 }

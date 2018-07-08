@@ -48,6 +48,11 @@ app.use(session({
     resave: false,
     saveUninitialized: true
   }));
+
+//passport init and session middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 //mount flash
 app.use(flash());
 
