@@ -4,12 +4,16 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 
 //Load routes
 const indexRouter = require('./routes/indexRouter');
 const aboutRouter = require('./routes/aboutRouter');
 const ideasRouter = require('./routes/ideasRouter');
 const usersRouter = require('./routes/usersRouter');
+
+//passport config
+require('./config/passport')(passport);
 
 const app = express();
 const port = 5000;

@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const UserModel = require('../models/User');
+const passport = require('passport');
 
 
 router.get('/login', (req, res, next) => {
@@ -11,6 +12,16 @@ router.get('/login', (req, res, next) => {
 
 router.get('/register', (req, res, next) => {
     res.render('users/register');
+});
+
+//Login POST FORM
+router.post('/login', (req, res, next) => {
+    //this is how we use the local strategy but we need to defien it
+    passport.authenticate('local', {
+       successRedirect: '/ideas',
+       failureRedirect: '/users/login',
+       failureFlash: true 
+    })(req, res, next);
 });
 
 // Register form POST

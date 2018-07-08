@@ -339,5 +339,30 @@ We don't need passport to register because all we are doing is saving a hashed p
 ## section 5 lecture 30
 #### Hooking up a local strategy with passport
 
+install passport and passport-local 
+* require passport in the usersRouter
+* * wee need a post request to login with 
+* 
+```javascript
+        router.post('login', (req, res, next) => {
+    /* this is how we use the local strategy but we need to defien it */
+    passport.authenticate('local', {
+       successRedirect: '/ideas',
+       failureRedirect: '/users/login',
+       failureFlash: true 
+    })(req, res, next);
+});
+```
+* create a config folder
+* in config folder create a passport.js
+* there you should require the passport LocalStrategy.
+* bring mongoose and bcrypt and the corresponding model 
+* now export a function that has the local strategy
+* require config in app.js and pass passport as argument
+* then finish the strategy passport gets access to the reques fields and that way it can check everything
 
-
+## section 5 lecture 31
+#### finishin the loging functionality
+in the config file with the strategy 
+* UserModel finde one with the email and compare it 
+* in errros check for error just for passport is just a variable
