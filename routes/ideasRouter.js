@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const IdeaModel = require('../models/Idea');
 
 //Load helper
-const {ensureAuthenticated} = require('../helpers/auth');
+const { ensureAuthenticated } = require('../helpers/auth');
 
 
 //get form to add ideas
@@ -14,7 +14,7 @@ router.get('/add', ensureAuthenticated, (req, res, next) => {
 
 //fetch the ideas
 router.get('/', ensureAuthenticated, (req, res) => {
-    IdeaModel.find({})
+    IdeaModel.find({ user: req.user.id })
         //sort ideas in descending order
         .sort({ date: 'desc' })
         .then((ideas) => {
@@ -27,7 +27,14 @@ router.get('/', ensureAuthenticated, (req, res) => {
 // Edit Idea form
 router.get('/edit/:id', ensureAuthenticated, (req, res, next) => {
     IdeaModel.findOne({ _id: req.params.id })
-        .then(idea => res.render('ideas/edit', { idea }))
+        .then(idea => {
+            if (idea.user !== req.user.id) {
+                req.flash('error_msg', 'Not Authorized');
+                res.redirect('/ideas');
+            } else {
+                res.render('ideas/edit', { idea })
+            }
+        })
 
 
 });
@@ -42,10 +49,10 @@ router.put('/:id', ensureAuthenticated, (req, res, next) => {
             //I want to practice  promises
             return Promise.resolve(idea);
         }).then(idea => idea.save())
-            .then(idea => {
-                req.flash('success_msg', 'Idea updated');
-                res.redirect('/ideas')
-            })
+        .then(idea => {
+            req.flash('success_msg', 'Idea updated');
+            res.redirect('/ideas')
+        })
         .catch(err => console.log(err))
 });
 
@@ -82,7 +89,8 @@ router.post('/', ensureAuthenticated, (req, res) => {
     } else {
         const newUser = {
             title: req.body.title,
-            details: req.body.details
+            details: req.body.details,
+            user: req.user.id
         }
 
         new IdeaModel(newUser)

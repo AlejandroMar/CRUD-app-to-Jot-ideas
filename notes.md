@@ -410,3 +410,8 @@ the logout() method comes from passport
 create a function ensure authenticated as a helper and use it where ever you need
 * create a helpers folder and there create a file called auth.js
 
+## section 5 lecture 34
+#### acccess control 
+
+we want to show the ideas only to the user that created them, so we need to go to the idea model and add an user field with the user's id, so that every idea has the id of the user that created it.
+go to get('/ideas') and  IdeaModel.find({ user: req.user.id })
