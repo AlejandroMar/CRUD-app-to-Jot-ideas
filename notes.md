@@ -434,3 +434,12 @@ const port = process.env.PORT || 5000;
 * give email, and password
 * then write still in command line: heroku create
 * go to heroku and click on your project
+* go there to deploy and add your repository and: heroku git:remote -a nameOfApp
+* in settings set the .env variables (global variables)
+* push to heroku: git push heroku master 
+* I can open my app in with the heroku dash board or with: heroku open
+
+## section 5 lecture 37
+#### add domain name
+get a domain name from namecheap 
+do it later when you have money
