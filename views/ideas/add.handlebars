@@ -1,7 +1,6 @@
-
 <div class="card card-body">
     <h3>Your idea</h3>
-    <form action="/ideas" method="post">
+    <form action="/ideas/add" method="post">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" required>
@@ -10,6 +9,7 @@
             <label for="datails">Details</label>
             <textarea type="text" class="form-control" name="details" required></textarea>
         </div>
+        {{!-- here the button submits the form and it's fields then with body parser we turn it into an JS object --}}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

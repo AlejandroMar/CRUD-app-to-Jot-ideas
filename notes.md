@@ -431,7 +431,7 @@ const port = process.env.PORT || 5000;
 * with heroku you need a github repository
 * then install heroku toolbelt
 * in project run heroku login
-* give email, and password
+* give email, and password 
 * then write still in command line: heroku create
 * go to heroku and click on your project
 * go there to deploy and add your repository and: heroku git:remote -a nameOfApp

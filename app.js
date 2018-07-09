@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
@@ -5,11 +6,11 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-require('dotenv').config()
 
 
 
-//Load routes
+
+//Import routes
 const indexRouter = require('./routes/indexRouter');
 const aboutRouter = require('./routes/aboutRouter');
 const ideasRouter = require('./routes/ideasRouter');
@@ -55,7 +56,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-//passport init and session middleware
+//passport init and session middleware important goes after normal session
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -66,7 +67,9 @@ app.use(flash());
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
+    //this is the error message for passport
     res.locals.error = req.flash('error');
+    //in passport config we get access to the user and we assign it to the request object
     res.locals.user = req.user || null;
     next();
 });

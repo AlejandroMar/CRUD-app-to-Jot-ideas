@@ -26,6 +26,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
 
 // Edit Idea form
 router.get('/edit/:id', ensureAuthenticated, (req, res, next) => {
+    //here we search for the task's id
     IdeaModel.findOne({ _id: req.params.id })
         .then(idea => {
             if (idea.user !== req.user.id) {
@@ -40,7 +41,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res, next) => {
 });
 
 // Edit the Idea with PUT request method
-router.put('/:id', ensureAuthenticated, (req, res, next) => {
+router.put('/edit/:id', ensureAuthenticated, (req, res, next) => {
 
     IdeaModel.findOne({ _id: req.params.id })
         .then(idea => {
@@ -68,7 +69,7 @@ router.delete('/:id', ensureAuthenticated, (req, res, next) => {
 
 
 //Process Form
-router.post('/', ensureAuthenticated, (req, res) => {
+router.post('/add', ensureAuthenticated, (req, res) => {
     //simple server validation
     let errors = [];
 
@@ -87,13 +88,13 @@ router.post('/', ensureAuthenticated, (req, res) => {
             details: req.body.details
         });
     } else {
-        const newUser = {
+        const newIdea = {
             title: req.body.title,
             details: req.body.details,
             user: req.user.id
         }
 
-        new IdeaModel(newUser)
+        new IdeaModel(newIdea)
             .save()
             .then(idea => {
                 req.flash('success_msg', 'New Idea added');

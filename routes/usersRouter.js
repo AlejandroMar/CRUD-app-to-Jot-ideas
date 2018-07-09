@@ -16,7 +16,7 @@ router.get('/register', (req, res, next) => {
 
 //Login POST FORM
 router.post('/login', (req, res, next) => {
-    //this is how we use the local strategy but we need to defien it
+    //this is how we use the local strategy but we need to define in config/passport
     passport.authenticate('local', {
         successRedirect: '/ideas',
         failureRedirect: '/users/login',

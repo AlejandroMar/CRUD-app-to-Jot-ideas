@@ -3,7 +3,11 @@ const router = express.Router();
 
 
 router.get('/', (req, res, next) => {
-    const title = 'Welcome Alejandro';
+    let title = 'Welcome to Que Nota!';
+    if (req.isAuthenticated()) {
+        title = 'Welcome ' + req.user.name;
+    }
+
     // with es6
     res.render('index', { title });
 });

@@ -12,12 +12,14 @@ module.exports = function (passport) {
     //this module will be used in app.js, go there to see
     passport.use(new LocalStrategy({
         usernameField: 'email'
+        //done is a callback function
     }, (email, password, done) => {
         //console.log(email);
         /*now look for user in data-base with that email and see if passwords match*/
         UserModel.findOne({ email: email })
             .then(user => {
                 if (!user) {
+                    //the second arg is the user in this case false it seems that when error or no user message is error in locals
                     return done(null, false, { message: 'No user found' });
                 }
 
